@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile | Company Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 text-center">
+                <h6 class="fw-bold mb-0 text-uppercase text-muted">Update My Information</h6>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <form action="{% url 'edit_profile' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-muted mb-1">First Name</label>
+                        <input type="text" name="first_name" class="form-control form-control-sm bg-light" 
+                               value="{{ request.user.first_name }}" placeholder="Enter first name">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-muted mb-1">Last Name</label>
+                        <input type="text" name="last_name" class="form-control form-control-sm bg-light" 
+                               value="{{ request.user.last_name }}" placeholder="Enter last name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted mb-1">Email Address</label>
+                        <input type="email" name="email" class="form-control form-control-sm bg-light" 
+                               value="{{ request.user.email }}" placeholder="email@company.com">
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm fw-bold shadow-sm">
+                            <i class="bi bi-save me-1"></i> Save Changes
+                        </button>
+                        
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'admin_dashboard' %}" class="btn btn-light btn-sm text-muted">Cancel</a>
+                        {% else %}
+                            <a href="{% url 'employee_dashboard' %}" class="btn btn-light btn-sm text-muted">Cancel</a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <p class="text-center text-muted mt-3 x-small">
+            Username: <strong>{{ request.user.username }}</strong> (Cannot be changed)
+        </p>
+    </div>
+</div>
+{% endblock %}

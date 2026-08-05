@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up | Company Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card border-0 shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="bi bi-person-plus text-success" style="font-size: 3rem;"></i>
+                    <h2 class="fw-bold">Create Account</h2>
+                </div>
+
+                <form action="{% url 'signup' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted text-uppercase">Full Name</label>
+                        <input type="text" name="name" class="form-control bg-light" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted text-uppercase">Email Address</label>
+                        <input type="email" name="email" class="form-control bg-light" placeholder="john@company.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted text-uppercase">Username</label>
+                        <input type="text" name="username" class="form-control bg-light" placeholder="johndoe123" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted text-uppercase">Password</label>
+                        <input type="password" name="password" class="form-control bg-light" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-muted text-uppercase">Register As</label>
+                        <select name="role" class="form-select bg-light">
+                            <option value="employee">Employee (Standard Access)</option>
+                            <option value="admin">Admin (Staff Access)</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success py-2 fw-bold shadow-sm rounded-3">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="small text-muted">Already have an account? <a href="{% url 'login_user' %}" class="text-decoration-none">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
