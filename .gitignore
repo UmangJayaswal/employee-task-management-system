@@ -10,6 +10,7 @@ pyvenv.cfg
 # Python
 __pycache__/
 *.py[cod]
+*.pyc
 
 # Django
 db.sqlite3
